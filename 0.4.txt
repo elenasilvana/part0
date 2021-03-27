@@ -1,0 +1,26 @@
+user ->browser: Submit note
+browser->server: HTTP POST https://studies.cs.helsinki.fi/exampleapp/new_note
+
+note over server:
+The new note is received and added to DB
+    { note: 'note content' }
+end note
+
+server-->browser: Status Code: 302
+
+note over browser:
+The page is reloaded
+end note
+
+browser->server: HTTP GET https://studies.cs.helsinki.fi/exampleapp/notes
+server-->browser: HTML-code
+browser->server: HTTP GET https://studies.cs.helsinki.fi/exampleapp/main.css
+server-->browser: main.css
+browser->server: HTTP GET https://studies.cs.helsinki.fi/exampleapp/main.js
+server-->browser: main.js
+browser->server: HTTP GET https://studies.cs.helsinki.fi/exampleapp/data.json
+server-->browser: [{content, date }]
+
+note over browser:
+The retrieved notes are display in the browser
+end note
